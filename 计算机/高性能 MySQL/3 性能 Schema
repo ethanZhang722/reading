@@ -1,0 +1,39 @@
+### 性能 Schema 介绍
+
+Performance Schema 是 MySQL 5.5 及更高版本中引入的一个功能，它提供了一套丰富的工具和视图，用于监控和诊断 MySQL 服务器内部的性能。Performance Schema 通过收集服务器运行时的各种性能数据，帮助管理员和开发人员识别性能瓶颈和潜在问题。
+
+Performance Schema 包含以下主要组件：
+
+- **事件表**：记录各种事件的数据。
+- **模式**：包含用于查询性能数据的视图和表。
+- **触发器**：在特定事件发生时自动执行的操作。
+- **变量**：存储与性能相关的配置信息。
+
+### 检查内存使用情况
+
+Performance Schema 提供了多种方式来检查内存使用情况，以下是一些常用的方法：
+
+1. **查看内存使用概览**：
+   使用 `SHOW GLOBAL STATUS LIKE 'Memory%';` 命令可以查看MySQL服务器当前的内存使用情况，包括缓冲池大小、缓存命中率等。
+
+2. **查看特定事件的内存使用**：
+   使用 `SELECT * FROM performance_schema.memory_summary_by_event_name;` 可以查看不同事件（如查询、连接等）的内存使用情况。
+
+### 内存使用聚合参数
+
+Performance Schema 中的内存使用聚合参数包括以下几种：
+
+- **global**：全局聚合，包括所有线程和会话的统计信息。
+- **thread**：线程聚合，包括所有线程的统计信息。
+- **account**：按用户账号聚合，统计特定用户的内存使用情况。
+- **host**：按主机聚合，统计特定主机的内存使用情况。
+- **user**：按用户名聚合，统计特定用户的内存使用情况。
+
+例如，要查看特定用户 `user1` 的内存使用情况，可以使用以下查询：
+
+```sql
+SELECT * FROM performance_schema.memory_summary_by_user_by_event_name
+WHERE USER = 'user1';
+```
+
+通过这些聚合参数，管理员可以更细致地分析内存使用情况，从而进行针对性的优化。
