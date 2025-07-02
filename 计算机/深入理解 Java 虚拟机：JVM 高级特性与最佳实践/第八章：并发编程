@@ -1,0 +1,50 @@
+第八章“并发编程”深入探讨了Java语言中的并发编程机制，以下是本章的主要内容：
+
+### JVM 并发模型
+
+Java虚拟机（JVM）为并发编程提供了强大的支持，其核心模型包括：
+
+1. **线程模型**：Java中的线程是轻量级进程，由JVM直接管理。每个线程都有自己的栈和程序计数器，但共享方法区和堆内存。
+
+2. **内存模型**：Java内存模型定义了线程之间如何通过主内存进行交互，包括可见性、原子性和有序性等概念。
+
+3. **锁机制**：JVM提供了监视器锁（Monitor Lock）机制，用于实现线程间的同步。
+
+### 线程与锁
+
+1. **线程状态**：Java线程有新建（New）、就绪（Runnable）、阻塞（Blocked）、等待（Waiting）、超时等待（Timed Waiting）和终止（Terminated）等状态。
+
+2. **线程创建与启动**：
+   - 使用`Thread`类或`Runnable`接口创建线程。
+   - 使用`start()`方法启动线程。
+
+3. **线程同步**：
+   - **监视器锁**：使用`synchronized`关键字实现同步，保证同一时间只有一个线程可以访问同步代码块。
+   - **重入锁（ReentrantLock）**：提供比`synchronized`更灵活的锁机制，支持公平锁、非公平锁等。
+
+4. **线程通信**：
+   - **等待/通知机制**：使用`wait()`、`notify()`和`notifyAll()`方法实现线程间的通信。
+   - **条件变量**：`ReentrantLock`提供的`Condition`接口，提供更灵活的线程通信方式。
+
+### 并发工具类
+
+Java并发包（java.util.concurrent）提供了丰富的并发工具类，包括：
+
+1. **线程池（Executors）**：
+   - `Executors.newFixedThreadPool()`：创建固定大小的线程池。
+   - `Executors.newCachedThreadPool()`：创建可缓存的线程池。
+   - `Executors.newSingleThreadExecutor()`：创建单线程的线程池。
+
+2. **原子类（java.util.concurrent.atomic）**：
+   - `AtomicInteger`、`AtomicLong`、`AtomicReference`等：提供原子操作，保证操作的不可分割性。
+
+3. **并发集合（java.util.concurrent集合）**：
+   - `ConcurrentHashMap`、`CopyOnWriteArrayList`、`BlockingQueue`等：提供线程安全的集合操作。
+
+4. **锁和同步器（java.util.concurrent.locks）**：
+   - `ReentrantLock`、`ReadWriteLock`、`Semaphore`、`CountDownLatch`等：提供更高级的锁和同步机制。
+
+5. **线程安全工具**：
+   - `Future`、`Callable`、`FutureTask`：用于异步计算和结果返回。
+
+通过这些工具类，开发者可以更方便地实现并发编程，提高应用程序的并发性能和稳定性。
